@@ -29,13 +29,11 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Activation")
 	void BP_Deactivate();
 
-	virtual void NativeActivate()
-	{
-		BP_Activate();
-	}
+	virtual void NativeActivate() = 0;
+	
 
-	virtual void NativeDeactivate()
-	{
-		BP_Deactivate();
-	}
+	virtual void NativeDeactivate() = 0;
+	
+		
+	
 };

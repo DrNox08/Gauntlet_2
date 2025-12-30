@@ -45,9 +45,12 @@ void ALever::Tick(float DeltaTime)
 
 void ALever::NativeInteract(AActor* Interactor)
 {
-	IInteractable::NativeInteract(Interactor);
-
 	ActivateLever();
+}
+
+void ALever::BP_Interact_Implementation(AActor* Interactor)
+{
+	NativeInteract(Interactor);
 }
 
 void ALever::ActivateLever()
@@ -117,12 +120,12 @@ void ALever::UpdateRotation()
 		if (!bIsReturning)
 		{
 			//Activate linked actor
-			if (ActorToControl && ActorToControl->GetClass()->ImplementsInterface(UActivable::StaticClass())) 
+			if (ActorToControl && ActorToControl->GetClass()->ImplementsInterface(UActivable::StaticClass()))
 			{
 				IActivable::Execute_BP_Activate(ActorToControl);
 			}
-			
-			
+
+
 			//Start hold timer
 			GetWorldTimerManager().ClearTimer(HoldTimerHandle);
 			GetWorldTimerManager().SetTimer(
@@ -136,7 +139,7 @@ void ALever::UpdateRotation()
 		else
 		{
 			//Deactivate linked actor
-			if (ActorToControl && ActorToControl->GetClass()->ImplementsInterface(UActivable::StaticClass())) 
+			if (ActorToControl && ActorToControl->GetClass()->ImplementsInterface(UActivable::StaticClass()))
 			{
 				IActivable::Execute_BP_Deactivate(ActorToControl);
 			}

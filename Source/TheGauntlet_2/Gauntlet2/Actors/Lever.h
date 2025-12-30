@@ -68,8 +68,11 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	//Interface
-	UFUNCTION(CallInEditor, Category = "Interaction")
+	
 	virtual void NativeInteract(AActor* Interactor) override;
+	
+	UFUNCTION(CallInEditor, Category = "Interaction")
+	virtual void BP_Interact_Implementation(AActor* Interactor) override;
 
 private:
 	UFUNCTION(CallInEditor, Category = "Interaction")

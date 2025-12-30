@@ -28,8 +28,6 @@ public:
 	void BP_Interact(AActor* Interactor);
 
 	// Call in C++
-	virtual void NativeInteract(AActor* Interactor)
-	{
-		BP_Interact(Interactor);
-	}
+	virtual void NativeInteract(AActor* Interactor) = 0;
+	
 };
