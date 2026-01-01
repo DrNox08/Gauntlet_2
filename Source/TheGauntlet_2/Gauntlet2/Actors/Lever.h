@@ -25,7 +25,7 @@ public:
 	UPROPERTY(Blueprintreadwrite, EditAnywhere, Category = "Components")
 	UStaticMeshComponent* LeverMesh;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Interaction", meta = (MustImplement = "Activable"))
+	UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Category = "Interaction", meta = (MustImplement = "Activable"))
 	TObjectPtr<AActor> ActorToControl;
 
 	IActivable* Activable = nullptr;
