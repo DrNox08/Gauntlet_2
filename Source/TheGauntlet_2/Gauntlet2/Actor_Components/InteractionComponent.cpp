@@ -104,4 +104,10 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	{
 		InteractionTracedObjects(DistanceInteraction, RadiusInteraction);
 	}
+
+	if (ClosestActor != nullptr)
+	{
+		UKismetSystemLibrary::PrintString(GetWorld(), FString::Printf(TEXT("TROVATO")), true, true,
+		                                  FLinearColor::Green, 0.01f);
+	}
 }

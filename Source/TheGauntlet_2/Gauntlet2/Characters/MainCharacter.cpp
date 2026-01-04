@@ -6,6 +6,11 @@
 #include "EnhancedInputComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 
+AMainCharacter::AMainCharacter()
+{
+	InteractionComponent = CreateDefaultSubobject<UInteractionComponent>(TEXT("InteractionComponent"));
+}
+
 void AMainCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -19,4 +24,10 @@ void AMainCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInpu
 void AMainCharacter::TryInteract()
 {
 	UKismetSystemLibrary::PrintString(GetWorld(), TEXT("Interact Pressed"), true, true, FLinearColor::Green, 2.0f);
+	if (!IsValid(InteractionComponent))
+	{
+		UKismetSystemLibrary::PrintString(GetWorld(), TEXT("COMPONENT NOT FOUND"), true, true, FLinearColor::Green, 2.0f);
+	}
+	InteractionComponent->Interact();
+	
 }
