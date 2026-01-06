@@ -18,6 +18,7 @@ void AMainCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInpu
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &AMainCharacter::TryInteract);
+		EnhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Started, this, &AMainCharacter::DoPause);
 	}
 }
 
@@ -31,3 +32,7 @@ void AMainCharacter::TryInteract()
 	InteractionComponent->Interact();
 	
 }
+
+
+
+

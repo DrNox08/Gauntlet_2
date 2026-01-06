@@ -27,6 +27,10 @@ class THEGAUNTLET_2_API AMainCharacter : public ATheGauntlet_2Character
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
 	UInputAction* InteractAction;
 
+	// Additional Input: Interact
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	UInputAction* PauseAction;
+
 
 	protected:
 	// Called to bind functionality to input
@@ -36,4 +40,7 @@ class THEGAUNTLET_2_API AMainCharacter : public ATheGauntlet_2Character
 public:
 	
 	void TryInteract();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Pause")
+	void DoPause();
 };
