@@ -24,8 +24,9 @@ private:
 	int32 CurrentQuestStep = 0;
 
 	FText CurrentQuestInstructions = FText::GetEmpty();
-	
-	TSoftObjectPtr<UDataTable> CurrentQuestTable;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UDataTable> CurrentQuestTable;
 
 	public:
 
@@ -35,8 +36,12 @@ private:
 	UFUNCTION(BlueprintCallable, Category = "QuestSubSystem")
 	void StartQuest(TSoftObjectPtr<UDataTable> QuestTable);
 
-	UFUNCTION(blueprintCallable, Category = "QuestSubSystem")
+	UFUNCTION(BlueprintCallable, Category = "QuestSubSystem")
 	void UpdateQuest();
+
+	UFUNCTION(BlueprintCallable, Category = "QuestSubSystem")
+	void ResetQuestStep() { CurrentQuestStep = 0; }
+	
 
 	UFUNCTION(blueprintCallable, Category = "QuestSubSystem")
 	FText GetCurrentQuestInstructions() const { return CurrentQuestInstructions; }
