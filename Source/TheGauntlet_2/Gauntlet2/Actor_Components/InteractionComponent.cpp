@@ -54,7 +54,7 @@ TArray<AActor*> UInteractionComponent::InteractionTracedObjects(const float Dist
 		ActorsFound.AddUnique(HitResults.GetActor());
 	}
 
-	//AActor* ClosestActor = nullptr;
+	ClosestActor = nullptr;
 	float MinDistance = FLT_MAX;
 
 	for (AActor* Actor : ActorsFound)
