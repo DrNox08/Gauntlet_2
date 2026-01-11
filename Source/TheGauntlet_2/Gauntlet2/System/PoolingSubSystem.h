@@ -23,6 +23,22 @@ struct FPoolItem
 	TArray<TScriptInterface<IPoolable>> ActiveObjects;
 };
 
+USTRUCT(BlueprintType)
+struct FPoolStats
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Pooling")
+	FString ClassName;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Pooling")
+	int32 ActiveCount;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Pooling")
+	int32 InactiveCount;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Pooling")
+	int32 TotalCount;
+};
+	
+
 UCLASS()
 class THEGAUNTLET_2_API UPoolingSubSystem : public UGameInstanceSubsystem
 {
@@ -38,11 +54,14 @@ class THEGAUNTLET_2_API UPoolingSubSystem : public UGameInstanceSubsystem
 	UFUNCTION(BlueprintCallable, Category = "ObjectPoolSubSystem")
 	TScriptInterface<IPoolable> GetPooledObject(TSubclassOf<AActor> ActorClassToPool);
 
-	UFUNCTION(blueprintCallable, Category = "ObjectPoolSubSystem")
+	UFUNCTION(BlueprintCallable, Category = "ObjectPoolSubSystem")
 	void ReturnPooledObject(TScriptInterface<IPoolable> PooledObject, TSubclassOf<AActor> ActorClassToRepool);
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "ObjectPoolSubSystem")
 	TMap<TSubclassOf<AActor>, FPoolItem> PoolMap;
+
+	UFUNCTION(BlueprintCallable, Category = "ObjectPoolSubSystem")
+	TArray<FPoolStats> GetPoolStats();
 private:
 
 };

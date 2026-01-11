@@ -63,7 +63,7 @@ TScriptInterface<IPoolable> UPoolingSubSystem::GetPooledObject(TSubclassOf<AActo
 }
 
 void UPoolingSubSystem::ReturnPooledObject(TScriptInterface<IPoolable> PooledObject,
-	TSubclassOf<AActor> ActorClassToRepool)
+                                           TSubclassOf<AActor> ActorClassToRepool)
 {
 	if (!GetWorld()) return;
 	if (!IsValid(ActorClassToRepool)) return;
@@ -80,4 +80,23 @@ void UPoolingSubSystem::ReturnPooledObject(TScriptInterface<IPoolable> PooledObj
 	PoolItem->InactiveObjects.AddUnique(PooledObject);
 }
 
+TArray<FPoolStats> UPoolingSubSystem::GetPoolStats()
+{
+	FPoolStats Stats;
+	TArray<FPoolStats> AllStats;
+	for (const TPair<TSubclassOf<AActor>, FPoolItem>& PoolPair : PoolMap)
+	{
+		Stats.ClassName = PoolPair.Key->GetName();
+		Stats.ActiveCount = PoolPair.Value.ActiveObjects.Num();
+		Stats.InactiveCount = PoolPair.Value.InactiveObjects.Num();
+		Stats.TotalCount = Stats.ActiveCount + Stats.InactiveCount;
+		AllStats.Add(Stats);
+	}
 
+	return AllStats;
+}
+		
+
+		
+
+	
